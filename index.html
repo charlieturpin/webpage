@@ -1,207 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>3D Refraction Demo (three.js)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    html,body { height:100%; margin:0; background:#111; }
-    #container { width:100%; height:100vh; overflow:hidden; display:block; }
-    .help {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      color: #ddd;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: rgba(0,0,0,0.35);
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      z-index: 2;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Diagnostic Tests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-  <div id="container"></div>
-  <div class="help">Drag to orbit • Scroll to zoom • Use GUI to change material</div>
 
-  <!-- three.js as ES module -->
-  <script type="module">
-    import * as THREE from 'https://unpkg.com/three@0.152.2/build/three.module.js';
-    import { OrbitControls } from 'https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js';
-    import { GUI } from 'https://unpkg.com/lil-gui@0.18.0/dist/lil-gui.esm.min.js';
+    <h1>Computer Diagnostic Tests</h1>
 
-    // ----- basic scene setup -----
-    const container = document.getElementById('container');
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.physicallyCorrectLights = true;
-    container.appendChild(renderer.domElement);
+    <p>A <strong>computer diagnostic test</strong> is a procedure or utility used to check the hardware and/or software of a computer system to <strong>identify problems, failures, or performance issues</strong>. These tests help determine the root cause of symptoms like slowness, crashes, or component malfunctions.</p>
 
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0c0c12);
+    <hr>
 
-    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 2000);
-    camera.position.set(0, 1.2, 3.5);
+    <h2>Common Types of Diagnostic Tests</h2>
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
+    <p>Diagnostic tests can be broadly categorized based on the component they analyze:</p>
 
-    // ----- lights -----
-    const hemi = new THREE.HemisphereLight(0xddeeff, 0x202028, 0.7);
-    scene.add(hemi);
+    <h3>Hardware Diagnostics</h3>
+    <p>These tests focus on physical components:</p>
+    <ul>
+        <li><strong>Memory (RAM) Tests:</strong> Check the Random Access Memory for errors. Built-in tools like **Windows Memory Diagnostic** or third-party utilities like **MemTest86** are used.</li>
+        <li><strong>Hard Drive/SSD Tests:</strong> Check the storage drive's health, often using **S.M.A.R.T.** (Self-Monitoring, Analysis, and Reporting Technology) data, or performing read/write tests.</li>
+        <li><strong>CPU/Processor Tests:</strong> Check the Central Processing Unit's functionality, often through **stress tests** to see how it performs under high load and to monitor temperatures.</li>
+        <li><strong>Graphics/GPU Tests:</strong> Check the Graphics Processing Unit, often using benchmarking software that puts a heavy load on the graphics card.</li>
+        <li><strong>Pre-boot Diagnostics:</strong> Tests run <em>before</em> the operating system loads (e.g., UEFI Diagnostics), which are crucial if the system won't boot.</li>
+    </ul>
 
-    const dir = new THREE.DirectionalLight(0xffffff, 1.1);
-    dir.position.set(5, 8, 2);
-    dir.castShadow = false;
-    scene.add(dir);
+    <h3>Software Diagnostics</h3>
+    <p>These tests focus on the operating system, applications, and system configuration:</p>
+    <ul>
+        <li><strong>System Performance Monitoring:</strong> Tools like **Windows Performance Monitor** provide real-time data on CPU, memory, disk, and network usage to pinpoint bottlenecks.</li>
+        <li><strong>Event Logging/Viewing:</strong> Utilities like the **Windows Event Viewer** record significant events, errors, and warnings that can indicate software or driver conflicts.</li>
+        <li><strong>Driver Analysis:</strong> Checking for outdated, corrupt, or incompatible drivers.</li>
+        <li><strong>Network Diagnostics:</strong> Tools like **Ping** or **Traceroute** check connectivity and network performance.</li>
+    </ul>
 
-    // ----- add surrounding geometry so refraction is visible -----
-    const floor = new THREE.Mesh(
-      new THREE.PlaneGeometry(40, 40),
-      new THREE.MeshStandardMaterial({ color: 0x111116, roughness: 0.9, metalness: 0.0 })
-    );
-    floor.rotation.x = -Math.PI/2;
-    floor.position.y = -1.1;
-    scene.add(floor);
+    <hr>
 
-    // colorful boxes and torus for environment
-    const group = new THREE.Group();
-    const boxGeo = new THREE.BoxGeometry(0.6,0.6,0.6);
-    const torusGeo = new THREE.TorusGeometry(0.35, 0.12, 20, 80);
-    const matA = new THREE.MeshStandardMaterial({ color: 0xff6b6b, roughness: 0.35, metalness: 0.05 });
-    const matB = new THREE.MeshStandardMaterial({ color: 0x6bc1ff, roughness: 0.25, metalness: 0.02 });
-    const matC = new THREE.MeshStandardMaterial({ color: 0x7dff9a, roughness: 0.4, metalness: 0.02 });
+    <h2>Built-in Operating System Tools</h2>
 
-    const b1 = new THREE.Mesh(boxGeo, matA);
-    b1.position.set(-1.1, -0.45, -0.6);
-    group.add(b1);
+    <p>Most operating systems include essential diagnostic utilities:</p>
 
-    const b2 = new THREE.Mesh(boxGeo, matB);
-    b2.position.set(1.2, -0.45, -0.3);
-    group.add(b2);
+    <table>
+        <thead>
+            <tr>
+                <th>Operating System</th>
+                <th>Tool/Method</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Windows</strong></td>
+                <td><strong>Windows Memory Diagnostic</strong></td>
+                <td>Checks RAM for errors.</td>
+            </tr>
+            <tr>
+                <td><strong>Windows</strong></td>
+                <td><strong>Performance Monitor</strong></td>
+                <td>Monitors system health and performance in real-time.</td>
+            </tr>
+            <tr>
+                <td><strong>Windows</strong></td>
+                <td><strong>Event Viewer</strong></td>
+                <td>Displays a log of system, security, and application events and errors.</td>
+            </tr>
+            <tr>
+                <td><strong>macOS</strong></td>
+                <td><strong>Apple Diagnostics</strong></td>
+                <td>Tests the Mac's hardware components.</td>
+            </tr>
+            <tr>
+                <td><strong>macOS</strong></td>
+                <td><strong>Disk Utility</strong></td>
+                <td>Checks and repairs file system errors on drives.</td>
+            </tr>
+        </tbody>
+    </table>
 
-    const t1 = new THREE.Mesh(torusGeo, matC);
-    t1.position.set(0.1, -0.45, 0.9);
-    t1.rotation.x = Math.PI * 0.45;
-    group.add(t1);
+    <p>Using diagnostic tools is a key step in **troubleshooting** a computer issue, allowing users or technicians to isolate a problem to a specific piece of hardware or software.</p>
 
-    // a tall column
-    const col = new THREE.Mesh(new THREE.CylinderGeometry(0.22,0.22,2.0,32), new THREE.MeshStandardMaterial({ color:0xffdd66, roughness:0.6 }));
-    col.position.set(2.0, -0.1, 1.4);
-    group.add(col);
-
-    scene.add(group);
-
-    // ----- dynamic cube camera for environment map (refraction) -----
-    const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512, {
-      generateMipmaps: true,
-      minFilter: THREE.LinearMipmapLinearFilter,
-      encoding: THREE.sRGBEncoding
-    });
-    const cubeCamera = new THREE.CubeCamera(0.1, 1000, cubeRenderTarget);
-
-    // ----- refractive object material -----
-    const refractMaterial = new THREE.MeshPhysicalMaterial({
-      envMap: cubeRenderTarget.texture,
-      envMapIntensity: 1.0,
-      transmission: 1.0,     // make it transparent like glass
-      thickness: 0.8,        // apparent thickness for refraction
-      roughness: 0.02,
-      metalness: 0.0,
-      ior: 1.25,             // Index of Refraction (1.0 = air, water ~1.33, glass ~1.45)
-      reflectivity: 0.2,
-      clearcoat: 0.0,
-      transparent: true,
-      side: THREE.FrontSide
-    });
-
-    // mapping type to indicate refraction (not reflection)
-    refractMaterial.envMap.mapping = THREE.CubeRefractionMapping;
-
-    // object geometry
-    const sphereGeo = new THREE.SphereGeometry(0.75, 64, 64);
-    const refractiveSphere = new THREE.Mesh(sphereGeo, refractMaterial);
-    refractiveSphere.position.set(0, 0.08, 0);
-    scene.add(refractiveSphere);
-
-    // small inner bubble to show subtle internal distinction (optional)
-    const innerMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.9, metalness: 0, transparent: true, opacity: 0.03 });
-    const inner = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 40), innerMat);
-    inner.position.copy(refractiveSphere.position);
-    scene.add(inner);
-
-    // ----- GUI for tuning -----
-    const gui = new GUI({ width: 300 });
-    const params = {
-      ior: refractMaterial.ior,
-      thickness: refractMaterial.thickness,
-      roughness: refractMaterial.roughness,
-      transmission: refractMaterial.transmission,
-      envIntensity: refractMaterial.envMapIntensity,
-      resolution: 512,
-      rotateScene: true
-    };
-
-    gui.add(params, 'ior', 1.0, 2.2, 0.01).name('Index of Refraction').onChange(v => { refractMaterial.ior = v; });
-    gui.add(params, 'thickness', 0.01, 2.5, 0.01).name('Thickness').onChange(v => { refractMaterial.thickness = v; });
-    gui.add(params, 'roughness', 0.0, 1.0, 0.01).name('Roughness').onChange(v => { refractMaterial.roughness = v; });
-    gui.add(params, 'transmission', 0.0, 1.0, 0.01).name('Transmission').onChange(v => { refractMaterial.transmission = v; });
-    gui.add(params, 'envIntensity', 0.0, 2.0, 0.01).name('Env Intensity').onChange(v => { refractMaterial.envMapIntensity = v; });
-    gui.add(params, 'resolution', [256, 512, 1024]).name('CubeMap Res').onChange(v => {
-      cubeRenderTarget.setSize(Number(v));
-    });
-    gui.add(params, 'rotateScene').name('Rotate Scene');
-
-    // ----- responsiveness -----
-    window.addEventListener('resize', onWindowResize);
-    function onWindowResize() {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    }
-
-    // ----- animation -----
-    let lastTime = 0;
-    const clock = new THREE.Clock();
-
-    function animate(t) {
-      requestAnimationFrame(animate);
-      const dt = clock.getDelta();
-
-      controls.update();
-
-      // animate some surrounding objects so refraction is obvious
-      group.rotation.y += (params.rotateScene ? dt * 0.25 : 0);
-      t1.rotation.z += dt * 0.6;
-
-      // to create a correct environment map for the refractive object,
-      // hide the object, update cube camera (renders scene from its position),
-      // then show the object and render the main scene.
-      refractiveSphere.visible = false;
-      inner.visible = false; // also hide inner bubble while capturing env map
-      cubeCamera.position.copy(refractiveSphere.position);
-      cubeCamera.update(renderer, scene);
-      refractiveSphere.visible = true;
-      inner.visible = true;
-
-      // apply the generated env map with refractive mapping (done above)
-      refractMaterial.envMap = cubeRenderTarget.texture;
-      refractMaterial.needsUpdate = false; // not necessary every frame
-
-      renderer.render(scene, camera);
-    }
-
-    // kick off
-    animate();
-
-    // small helper: show fps in console every few seconds (optional)
-    // (remove if not desired)
-  </script>
 </body>
 </html>
